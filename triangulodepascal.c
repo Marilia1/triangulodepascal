@@ -1,15 +1,14 @@
 #include<stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <math.h>
 #define MAX 100
 
 
 int min(int a, int b);
 
-int binomialCoeff(int lin, int col)
+int coeficiente(int lin, int col)
 {
-    int vet_pascal[lin+1][col+1];
+    int combinacao[lin+1][col+1];
     int i, j;
 
     for (i = 0; i <= lin; i++)
@@ -18,14 +17,14 @@ int binomialCoeff(int lin, int col)
         {
 
             if (j == 0 || j == i)
-                vet_pascal[i][j] = 1;
+                combinacao[i][j] = 1;
 
             else
-                vet_pascal[i][j] = vet_pascal[i-1][j-1] + vet_pascal[i-1][j];
+                combinacao[i][j] = combinacao[i-1][j-1] + combinacao[i-1][j];
         }
     }
 
-    return vet_pascal[lin][col];
+    return combinacao[lin][col];
 }
 
 
@@ -37,24 +36,28 @@ int min(int a, int b)
 int main()
 {
    int grau, lin, col, count = 0;
-	int vet_pascal[MAX][MAX];
-	printf("Digite: ");
-	scanf("%i",&grau);
-	printf("Digite linha: ");
-   scanf("%d", &lin);
-   printf("Digite coluna: ");
-   scanf("%d", &col);
-   printf ("Value of vet_pascal(%d, %d) is %d ", lin, col, binomialCoeff(lin, col) );
+   int n,i;
+   printf("");
+   scanf("%d", &n);
+    int combinacao[MAX][MAX];
+	grau = 20;
+
+   for(i = 0; i<n; i++){
+   printf("");
+   scanf("%d %d", &lin,  &col);
+   printf ("Valor da combinacao(%d, %d) eh %d ", lin, col, coeficiente(lin, col) );
    printf("\n");
+   }
+
 	for(lin = 1 ; lin <= grau+1 ; lin++){
 	printf("Grau %i: ",count);
 	count++;
 
 	for(col = 0 ; col < lin; col++){
-		if(!col || !lin) vet_pascal[lin][col] = 1;
-		else if (vet_pascal[lin][col] == 0) vet_pascal[lin][col] = vet_pascal[lin-1][col] + vet_pascal[lin-1][col-1];
+		if(!col || !lin) combinacao[lin][col] = 1;
+		else if (combinacao[lin][col] == 0) combinacao[lin][col] = combinacao[lin-1][col] + combinacao[lin-1][col-1];
 
-		printf("%i ", vet_pascal[lin][col]);
+		printf("%i ", combinacao[lin][col]);
 
 		}
 		printf("\n");
@@ -62,8 +65,8 @@ int main()
 	}
 
 
-	system("PAUSE");
 return 0;
 
 
 }
+
