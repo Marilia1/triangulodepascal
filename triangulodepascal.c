@@ -4,35 +4,35 @@
 #define MAX 100
 
 
-int min(int a, int b);
+int min(int a,int b);
 
-int coeficiente(int lin, int col)
+int Coeficiente(int lin, int col)
 {
-    int combinacao[lin+1][col+1];
+    int C[lin+1][col+1];
     int i, j;
 
     for (i = 0; i <= lin; i++)
     {
         for (j = 0; j <= min(i, col); j++)
         {
-
+            // caso base
             if (j == 0 || j == i)
-                combinacao[i][j] = 1;
+                C[i][j] = 1;
 
+            // Calcular o valor usando os valores armazenados anteriormente
             else
-                combinacao[i][j] = combinacao[i-1][j-1] + combinacao[i-1][j];
+                C[i][j] = C[i-1][j-1] + C[i-1][j];
         }
     }
 
-    return combinacao[lin][col];
+    return C[lin][col];
 }
 
-
-int min(int a, int b)
+// retorna min de dois inteiros
+int min(int a,int b)
 {
     return (a<b)? a: b;
 }
-
 int main()
 {
    int grau, lin, col, count = 0;
@@ -45,7 +45,7 @@ int main()
    for(i = 0; i<n; i++){
    printf("");
    scanf("%d %d", &lin,  &col);
-   printf ("Valor da combinacao(%d, %d) eh %d ", lin, col, coeficiente(lin, col) );
+   printf ("Valor da combinacao(%d, %d) eh %d ", lin, col, Coeficiente(lin, col) );
    printf("\n");
    }
 
@@ -69,4 +69,3 @@ return 0;
 
 
 }
-
